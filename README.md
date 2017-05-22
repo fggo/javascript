@@ -1,5 +1,5 @@
 * [Values, Types, and Operators](#values-types-and-operators)
-* [](#)
+* [Program Structure](#program-structure)
 
 # Values, Types, and Operators
 js basic value types : number, string, boolean, object, function, and undefined value
@@ -41,6 +41,12 @@ console.log(true ? 1:2) //1 (ternary operator)
 console.log(false ? 1:2) //2
 ```
 
+## Undefined value
+```javascript
+null
+undefined //interchangeable with null
+```
+
 ## Automatic type conversion
 ```javascript
 console.log(8 * null) // → 0
@@ -48,10 +54,20 @@ console.log("5" - 1) // → 4
 console.log("5" + 1) // → 51
 console.log("five" * 2) // → NaN
 console.log(false == 0) // → true
-console.log(8 * null) // → 0
-console.log("5" - 1) // → 4
-console.log("5" + 1) // → 51
-console.log("five" * 2) // → NaN
-console.log(false == 0) // → true
+
+console.log(null == undefined); // → true
+console.log(null == 0); // → false
 ```
 
+## Short-Circuiting of Logigcal Operators
+expression to the right is evaluated only when necessary
+
+```javascript
+console.log(null || "user") // → user
+console.log("Karl" || "user") // → Karl
+
+console.log(true || 0) // → true
+console.log(false && 0) // → false
+```
+
+# Program Structure
