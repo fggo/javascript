@@ -153,8 +153,7 @@ line" // A one-line string written on 3 lines. ECMAScript 5 only.
 '\\' Backslash ( \u005C )
 '\x XX' The Latin-1 character specified by the two hexadecimal digits XX
 '\u XXXX' The Unicode character specified by the four hexadecimal digits XXXX
-"café" === "c
-af\u00e9"; // => true
+"café" === "caf\u00e9"; // => true
 
 /*Working with Strings*/
 var msg = "Hello, " + "world"; // Produces the string "Hello, world"
