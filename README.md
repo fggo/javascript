@@ -134,7 +134,7 @@ A string is an immutable orderd sequence of 16-bit values
 "π is the ratio of a circle's circumference to its diameter"
 
 "two\nlines" // A string representing 2 lines written on one line
-"one\ 
+"one\
 long\
 line" // A one-line string written on 3 lines. ECMAScript 5 only.
 
@@ -148,12 +148,13 @@ line" // A one-line string written on 3 lines. ECMAScript 5 only.
 \v Vertical tab ( \u000B )
 \f Form feed ( \u000C )
 \r Carriage return ( \u000D )
-\" Double quote ( \u0022 )
-\' Apostrophe or single quote ( \u0027 )
-\\ Backslash ( \u005C )
-\x XX The Latin-1 character specified by the two hexadecimal digits XX
-\u XXXX The Unicode character specified by the four hexadecimal digits XXXX
-"café" === "caf\u00e9"; // => true
+'\"' Double quote ( \u0022 )
+'\'' Apostrophe or single quote ( \u0027 )
+'\\' Backslash ( \u005C )
+'\x XX' The Latin-1 character specified by the two hexadecimal digits XX
+'\u XXXX' The Unicode character specified by the four hexadecimal digits XXXX
+"café" === "c
+af\u00e9"; // => true
 
 /*Working with Strings*/
 var msg = "Hello, " + "world"; // Produces the string "Hello, world"
