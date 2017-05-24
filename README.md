@@ -134,9 +134,9 @@ A string is an immutable orderd sequence of 16-bit values
 "π is the ratio of a circle's circumference to its diameter"
 
 "two\nlines" // A string representing 2 lines written on one line
-"one\ // A one-line string written on 3 lines. ECMAScript 5 only.
+"one\ 
 long\
-line"
+line" // A one-line string written on 3 lines. ECMAScript 5 only.
 
 /*Escape Sequence*/
 'You\'re right, it can\'t be a quote'
