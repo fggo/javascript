@@ -378,5 +378,21 @@ parseInt("077", 10); // => 77 (7*10 + 7)
 ```
 
 #### Object to Primitive Conversions
+1. Object to Boolean
+2. Object to String
+  - toString()
+  - valueOf()
+```javascript
+/*1. All objects convert to true*/
+/*2. toString()*/
+({x:1, y:2}).toString()    // => "[object Object]"
+[1,2,3].toString()                  // => "1,2,3"
+(function(x) { f(x); }).toString()  // => "function(x) {\n    f(x);\n}"
+/\d+/g.toString()                   // => "/\\d+/g"
+new Date(2010,0,1).toString()  // => "Fri Jan 01 2010 00:00:00 GMT-0800 (PST)"
+/*2. valueOf()*/
+var d = new Date(2010, 0, 1);   // January 1st, 2010, (Pacific time)
+d.valueOf()                     // => 1262332800000
+```
 
 ### Variable Declaration
