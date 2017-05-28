@@ -1,5 +1,8 @@
 * [Introduction](#introduction-to-javascript)
 * [Function](#function)
+* [Loops](#loops)
+* [Control Flow](#control-flow)
+* [Data Structure](#data-structure)
 
 # Introduction
 ## Basic
@@ -52,12 +55,12 @@ console.log(8*2 !== 16); //strict inequality
 ## Control Flow
 ```javascript
 if ( "lalala".length < 2*5)
-    console.log("short string")
+	console.log("short string")
 else if("lalala".length === 2*5)
-    console.log("string length is 10")
+	console.log("string length is 10")
 else{
-    console.log("too long");
-    console.log("not a short string");
+	console.log("too long");
+	console.log("not a short string");
 }
 ```
 
@@ -85,7 +88,7 @@ myName = myName.substring(0,2)
 ## Example
 ```javascript
 if(confirm("I am ready to play!"))
-    console.log("Welcome to our New game")
+	console.log("Welcome to our New game")
 
 var age = prompt("what's your age?")
 if(age < 13) console.log("You're too young, but that's okay");
@@ -100,8 +103,8 @@ else console.log("Too bad")
 function is a variable. function name follows 'lowerCamelCase'
 ```javascript
 var divideByThree = function(number){
-    var val = number / 3;
-    console.log(val);
+	var val = number / 3;
+	console.log(val);
 };
 divideByThree(6);
 ```
@@ -109,10 +112,10 @@ divideByThree(6);
 function returns value
 ```javascript
 var getCostOfFive = function(cost){
-    console.log(5*cost);
+	console.log(5*cost);
 }
 var orangeCost = function(){
-    return 5; //returns
+	return 5; //returns
 }
 getCostOfFive(orangeCost())
 ```
@@ -121,17 +124,17 @@ getCostOfFive(orangeCost())
 ```javascript
 var globalVar = "global variable";
 var foo = function() {
-    var localVar = "local variable"
-    console.log(globalVar);  //ok
+	var localVar = "local variable"
+	console.log(globalVar);  //ok
 }
 console.log(localVar); //error!
 
 /*another example*/
 var my_number = 7; //this has global scope
 var timesTwo = function(number) {
-    var my_number = number * 2;
-    console.log("Inside the function my_number is: ");
-    console.log(my_number); //local
+	var my_number = number * 2;
+	console.log("Inside the function my_number is: ");
+	console.log(my_number); //local
 }; 
 timesTwo(7); //14
 
@@ -145,36 +148,297 @@ Rock paper scissors
 var userChoice = prompt("Do you choose rock, paper or scissors?");
 var computerChoice = Math.random();
 if (computerChoice < 0.34) {
-    computerChoice = "rock";
+	computerChoice = "rock";
 } else if(computerChoice <= 0.67) {
-    computerChoice = "paper";
+	computerChoice = "paper";
 } else {
-    computerChoice = "scissors";
+	computerChoice = "scissors";
 } console.log("Computer: " + computerChoice);
 
 var compare = function(choice1, choice2){
-    if (choice1 === choice2)
-        return "The result is a tie!"
-    else if(choice1 === "rock"){
-        if(choice2 === "scissors")
-            return "rock wins"
-        else
-            return "paper wins"
-    }
-    else if(choice1 === "paper"){
-        if(choice2 === "rock")
-            return "paper wins"
-        else
-            return "scissors wins"
-    }
-    else{ //choice1 === "scissors"
-        if(choice2 === "rock")
-            return "rock wins"
-        else
-            return "scissors wins"
-    }
+	if (choice1 === choice2)
+		return "The result is a tie!"
+	else if(choice1 === "rock"){
+		if(choice2 === "scissors")
+			return "rock wins"
+		else
+			return "paper wins"
+	}
+	else if(choice1 === "paper"){
+		if(choice2 === "rock")
+			return "paper wins"
+		else
+			return "scissors wins"
+	}
+	else{ //choice1 === "scissors"
+		if(choice2 === "rock")
+			return "rock wins"
+		else
+			return "scissors wins"
+	}
 }
 compare(userChoice, computerChoice)
 ```
 
-### 
+# Loops
+
+## for Loops
+```javascript
+for (var counter = 1; counter <= 10; counter++) {
+	console.log(counter);
+}
+for (var i = 5; i < 51; i+=5) {
+	console.log(i);
+}
+for (var i = 10; i >= 0; i--) {
+	console.log(i);
+}
+```
+
+## Array
+```javascript
+var junk = ["a", "b", 1,2]
+console.log(junk)
+
+for(var i =0; i<junk.length; i++)
+	console.log("junk > " + junk[i]) //print (i+1)th element
+
+for each(var i in names)
+	console.log(i)
+```
+
+## Example
+```javascript
+text = "Blah blah blah blah blah blah Eric blah blah blah \
+Eric blah blah Eric blah blah blah blah blah blah blah Eric";
+var myName = "Eric";
+var hits = [];
+
+for(var i = 0; i < text.length; i++) {
+	if (text[i] === "E") {
+		for(var j = i; j < (myName.length + i); j++){
+			hits.push(text[j]);
+		}
+	}
+}
+
+if (hits.length === 0) {
+	console.log("Your name wasn't found!");
+} else {
+	console.log(hits);
+}
+```
+
+## while Loops
+```javascript
+var coinFace = Math.floor(Math.random() * 2);
+
+while(coinFace === 0){
+	console.log("Heads! Flipping again...");
+	var coinFace = Math.flo or(Math.random() * 2);
+}
+console.log("Tails! Done flipping.");
+
+var isTrue = true;
+while(isTrue){
+	console.log("Hi")
+	isTrue =false;)
+}
+
+var count = 0;
+var loop = function(){
+	while(count++ <3){
+		console.log("I'm looping!")
+	}
+};
+loop();
+```
+
+## do while Loops
+```javascript
+var loopCondition = false;
+do {
+	console.log("I'm gonna stop looping 'cause my condition is " + loopCondition + "!");
+} while (loopCondition);
+```
+
+## Example
+```javascript
+var slaying = true;
+var youHit = Math.floor(Math.random() * 2);
+var damageThisRound = Math.floor(Math.random() * 5 + 1);
+var totalDamage = 0;
+
+while (slaying) {
+	if (youHit) {
+		console.log("You hit the dragon and did " + damageThisRound + " damage!");
+		totalDamage += damageThisRound;
+
+		if (totalDamage >= 4) {
+		  console.log("You did it! You slew the dragon!");
+		  slaying = false;
+		}
+		else {
+			youHit = Math.floor(Math.random() * 2);
+		}
+	}
+	else {
+		console.log("The dragon burninates you! You're toast.");
+		slaying = false;
+	}
+}
+```
+
+# Control Flow
+```javascript
+/*if else if else*/
+var isEven = function(number) {
+	if(number %2 === 0){
+		return true
+	}
+	else if((number %2).isNaN()){
+		return false;
+	}
+	else{
+		return false;
+	}
+};
+
+/*for while*/
+for(var i =0;i<10; i++){}
+while(boolean){}
+do{
+/*code*/
+} while(boolean)
+
+/*switch break*/
+var num = parseInt(prompt("input integer")); //string -> integer
+
+switch(num){
+    case 1:
+    case 2:
+        console.log("you chose number 1 or 2");
+        break;
+    case 3:
+        console.log("number 3");
+        break;
+    default:
+        console.log("numbers other than 1,2,3");
+        break;
+}
+
+/*operator && || !*/
+var iLoveJavaScript = true;
+var iLoveLearning = true;
+
+if(iLoveJavaScript && iLoveLearning) {
+	console.log("Awesome! Let's keep learning!");
+} else if(!(iLoveJavaScript || iLoveLearning)) {
+	console.log("Let's see if we can change your mind.");
+} else {
+	console.log("You only like one but not the other? We'll work on it.");
+}
+```
+
+## Example
+```javascript
+var troll = prompt("You run into a troll! Do you FIGHT him, PAY him, or RUN?").toUpperCase();
+
+switch(troll) {
+	case 'FIGHT':
+		var strong = prompt("How courageous! Are you strong (YES or NO)?").toUpperCase();
+		var smart = prompt("Are you smart?").toUpperCase();
+		if(strong === 'YES' || smart === 'YES') {
+			console.log("You only need one of the two! You beat the troll--nice work!");
+		} else {
+			console.log("You're not strong OR smart? Well, if you were smarter, you probably wouldn't have tried to fight a troll. You lose!");
+		}
+		break;
+	case 'PAY':
+		var money = prompt("All right, we'll pay the troll. Do you have any money (YES or NO)?").toUpperCase();
+		var dollars = prompt("Is your money in Troll Dollars?").toUpperCase();
+		if(money === 'YES' && dollars === 'YES') {
+			console.log("Great! You pay the troll and continue on your merry way.");
+		} else {
+			console.log("Dang! This troll only takes Troll Dollars. You get whomped!");
+		}
+		break;
+	case 'RUN':
+		var fast = prompt("Let's book it! Are you fast (YES or NO)?").toUpperCase();
+		var headStart = prompt("Did you get a head start?").toUpperCase();
+		if(fast === 'YES' || headStart === 'YES') {
+			console.log("You got away--barely! You live to stroll through the forest another day.");
+		} else {
+			console.log("You're not fast and you didn't get a head start? You never had a chance! The troll eats you.");
+		}
+		break;
+	default:
+		console.log("I didn't understand your choice. Hit Run and try again, this time picking FIGHT, PAY, or RUN!");
+}
+```
+
+# Data Structure
+```javascript
+var arr = ['a', 1, true, new Object()]; //heterogeneous; mixture of data types
+console.log(arr[2])
+console.log(arr.length)
+
+var arr1 = [[1,2,3],[4,5,6],[7,8,9]] // 2d array
+var arr2 = [[1,2,3, true],[4,5,6],[7,8]] //jagged array
+var arr3 = [[new Object(), 1, true], [2,"a"]] //jagged array
+```
+
+## object
+combinations of key-value pairs
+```javascript
+var myObject = {
+    key: value,
+    key: value,
+    key: value
+};
+```
+
+```javascript
+var phonebookEntry = {};
+
+phonebookEntry.name = 'Oxnard Montalvo'; // name: 'Oxnard Montalvo'
+phonebookEntry.number = '(555) 555-5555'; // number: '(555) 555-5555'
+phonebookEntry.phone = function() { //phone: function(){}
+	console.log('Calling ' + this.name + ' at ' + this.number + '...');
+};
+phonebookEntry.phone();
+```
+
+```javascript
+/*object syntax*/
+var me = {
+    name: "lalala", 
+    age: 1 
+};
+
+/*create object and initialize*/
+var me = new Object(); //var me = {};
+me["name"] = "lalala";
+me["age"] = 1;
+
+var object1 = new Object();
+var object2 = new Object();
+var object3 = new Object();
+object1["name"] = "object1";
+object2["name"] = "object2";
+object3["name"] = "object3";
+```
+
+```javascript
+var myObject = {
+	name: 'Eduardo',
+	type: 'Most excellent',
+	interests: ['reading', 'soccer']
+};
+```
+
+## Example
+```javascript
+
+```
+
