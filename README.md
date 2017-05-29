@@ -4,6 +4,7 @@
 * [Control Flow](#control-flow)
 * [Data Structure](#data-structure)
 * [Object](#object)
+* [Object II](#object-ii)
 
 # Introduction
 ## Basic
@@ -670,5 +671,85 @@ function add(firstName, lastName, email, phoneNumber){
 }
 add("first", "last", "first.last@example.com", "111-1111");
 list(contacts)
+```
+
+# Object II
+fun with functions
+```javascript
+function Person(job, married) {//constructor
+	this.job = job;
+	this.married = married;
+	this.speak = function(){
+		console.log("Hello!");
+	};
+}
+var user = new Person("Codecademy Student",false);
+user.speak();
+```
+
+literal notation for function
+```javascript
+var james = {
+	job: "programmer",
+	married: false,
+	speak: function(msg) {
+		console.log("Hello, I am feeling " + msg);
+	}
+};
+
+james.speak("great");
+james.speak("just okay");
+```
+
+reference 
+```javascript
+var james = {
+    job: "programmer",
+    married: false,
+    sayJob: function() {
+        console.log("Hi, I work as a " + this.job);
+    }
+};
+james.sayJob();
+james.job = "super programmer"; //change job
+james.sayJob();
+
+```
+
+bracket notation has an advantage of using a string variable
+```javascript
+var james = {
+    job: "programmer",
+    married: false
+};
+var aProperty = "job";
+console.log(james[aProperty]);
+```
+
+typeof operator
+```javascript
+var anObj = { job: "I'm an object!" };
+var aNumber = 42;
+var aString = "I'm a string!";
+console.log(typeof anObj); // should print "object"
+console.log(typeof aNumber); // should print "number"
+console.log(typeof aString); // should print "string"
+```
+
+hasOwnProperty(str)
+```javascript
+var myObj = {
+    name: "a"
+};
+console.log( myObj.hasOwnProperty('name') ); // should print true
+console.log( myObj.hasOwnProperty('nickname') ); // should print false
+
+var suitcase = {
+    shirt: "Hawaiian"
+};
+if(suitcase.hasOwnProperty("shorts"))
+    console.log(suitcase.shorts);
+else
+    suitcase.shorts = "Hawaiian Blue";
 ```
 
