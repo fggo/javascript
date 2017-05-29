@@ -3,6 +3,7 @@
 * [Loops](#loops)
 * [Control Flow](#control-flow)
 * [Data Structure](#data-structure)
+* [Object](#object)
 
 # Introduction
 ## Basic
@@ -203,9 +204,19 @@ console.log(junk)
 for(var i =0; i<junk.length; i++)
 	console.log("junk > " + junk[i]) //print (i+1)th element
 
-for each(var i in names)
+for(var i in junk)
 	console.log(i)
 ```
+
+## for each in
+[for...in](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for...in) 
+statement iterates over the enumerable properties of an object, in original insertion order.
+
+[for each...in](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for_each...in)
+statement iterates a specified variable over all values of object's properties. 
+For each distinct property, a specified statement is executed.
+a similar statement as for...in, but iterates over the values of object's properties, rather than the property 
+names themselves (deprecated)
 
 ## Example
 ```javascript
@@ -439,6 +450,225 @@ var myObject = {
 
 ## Example
 ```javascript
+var friends ={}; // = new Object(); create new object
 
+friends.bill = { // friends["bill"] = {};
+	firstName: "Bill",
+	lastName: "Gates",
+	number: "(206)-000-0000",
+	address: ['avenue', 'redmond', 'WA', '90000']
+};
+friends.steve = { // friends["steve"] = {}:
+	firstName: "Steve",
+	lastName: "Jobs",
+	number: "(408)-000-0000",
+	address: ['avenue', 'Cupertino', 'CA', '90000']
+};
+
+/*print out keys*/
+var list = function(obj){
+	for(var prop in obj){
+		console.log(prop);
+	}
+};
+var search = function(name){
+	for(var prop in friends){
+		if(friends[prop].firstName === name){
+			console.log(friends[prop]);
+			return friends[prop];
+		}
+	}
+};
+list(friends);
+search("Steve");
+```
+
+# Object
+each property in an Object has name(key) and value
+
+```javascript
+var myObject = {
+	key: value, //key(poperty) : value
+	key: value,
+	key: value
+};
+```
+
+```javascript
+var snoopy = {
+	species: "beagle",
+	age : 10
+};
+```
+
+```javascript
+var buddy = new Object(); // var buddy = {};
+buddy.species = "golden retriever"; // buddy["species"] = "golden retriever"
+buddy.age = 5; // budd["age"] = 5;
+```
+
+```javascript
+var bob = {
+	name: "Bob Smith",
+	age: 30
+};
+var susan = {
+	name: "Susan Jordan",
+	age: 25
+};
+var name1 = bob.name;
+var age1 = bob.age;
+var name2 = susan["name"];
+var age2 = susan["age"];
+```
+
+## Object method
+```javascript
+var bob = new Object();
+bob.age = 17;
+bob.name = "Bob Smith";
+bob.setAge = function (newAge){
+	bob.age = newAge;
+	//this.age = newAge;
+};
+bob.getYearOfBirth = function () {
+	return 2014 - bob.age;
+};
+console.log(bob.getYearOfBirth());
+```
+
+
+```javascript
+var setAge = function (newAge) {
+	this.age = newAge;
+};
+var bob = new Object();
+bob.age = 30;
+bob.setAge = setAge;
+
+// update age
+bob.setAge(35)
+```
+
+## Constructor
+```javascript
+function Person(name,age) {
+	this.name = name;
+	this.age = age;
+}
+var bob = new Person("Bob Smith", 30);
+var susan = new Person("Susan Jordan", 25);
+```
+
+## Contructor with methods
+```javascript
+function Rectangle(height, width) {
+	this.height = height;
+	this.width = width;
+	this.calcArea = function() {
+		return this.height * this.width;
+	};
+	// put our perimeter function here!
+	this.calcPerimeter = function(){
+		return 2*(height+ width);
+	}
+}
+var rex = new Rectangle(7,3);
+var area = rex.calcArea();
+var perimeter = rex.calcPerimeter();
+```
+
+## Arrays of Objects
+```javascript
+// Our person constructor
+function Person (name, age) {
+	this.name = name;
+	this.age = age;
+}
+var family = new Array();
+family[0] = new Person("alice", 40);
+family[1] = new Person("bob", 42);
+family[2] = new Person("michelle", 8);
+for(int i =0; i<family.length; i++) console.log(family[i].name);
+```
+
+## Object passed into functions
+```javascript
+// Our person constructor
+function Person (name, age) {
+	this.name = name;
+	this.age = age;
+}
+var ageDifference = function(person1, person2) {
+	return person1.age - person2.age;
+}
+var olderAge = function(per1, per2){
+	if(ageDifference(per1, per2) > 0)
+		return per1.age;
+	else
+		return per2.age;
+}
+var alice = new Person("Alice", 30);
+var billy = new Person("Billy", 25);
+
+var diff = ageDifference(alice, billy);
+console.log("older age: " + olderAge(alice, billy));
+```
+
+```javascript
+function Circle (radius) {
+	this.radius = radius;
+	this.area = function () {
+		return Math.PI * this.radius * this.radius;
+	};
+	this.perimeter = function(){
+		return 2*Math.PI*radius;
+	}
+};
+```
+
+## Example
+```javascript
+var bob = {
+	firstName: "Bob",
+	lastName: "Jones",
+	phoneNumber: "(650) 777-7777",
+	email: "bob.jones@example.com"
+};
+var mary = {
+	firstName: "Mary",
+	lastName: "Johnson",
+	phoneNumber: "(650) 888-8888",
+	email: "mary.johnson@example.com"
+};
+var contacts = [bob, mary];
+
+function printPerson(person) {
+	console.log(person.firstName + " " + person.lastName);
+}
+function list() {
+	var contactsLength = contacts.length;
+	for (var i = 0; i < contactsLength; i++) {
+		printPerson(contacts[i]);
+	}
+}
+function search(lastName){
+	var contactLength = contacts.length;
+	for(var i =0;i<contactLength; i++){
+		if(contacts[i].lastName === lastName)
+			printPerson(contacts[i]);
+	}
+}
+function add(firstName, lastName, email, phoneNumber){
+	var contact = new Object();
+	contact.firstName = firstName;
+	contact.lastName = lastName;
+	contact.email = email;
+	contact.phoneNumber = phoneNumber;
+
+	contacts[contacts.length] = contact;
+}
+add("first", "last", "first.last@example.com", "111-1111");
+list(contacts)
 ```
 
