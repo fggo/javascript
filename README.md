@@ -413,9 +413,9 @@ var myObject = {
 ```javascript
 var phonebookEntry = {};
 
-phonebookEntry.name = 'Oxnard Montalvo'; // name: 'Oxnard Montalvo'
-phonebookEntry.number = '(555) 555-5555'; // number: '(555) 555-5555'
-phonebookEntry.phone = function() { //phone: function(){}
+phonebookEntry.name = 'Oxnard Montalvo'; // { name: 'Oxnard Montalvo'}
+phonebookEntry.number = '(555) 555-5555'; // { number: '(555) 555-5555'}
+phonebookEntry.phone = function() { //{ phone: function(){}}
 	console.log('Calling ' + this.name + ' at ' + this.number + '...');
 };
 phonebookEntry.phone();
@@ -701,7 +701,7 @@ james.speak("great");
 james.speak("just okay");
 ```
 
-reference 
+reference with dot notaion; change property value
 ```javascript
 var james = {
     job: "programmer",
@@ -741,8 +741,8 @@ hasOwnProperty(str)
 var myObj = {
     name: "a"
 };
-console.log( myObj.hasOwnProperty('name') ); // should print true
-console.log( myObj.hasOwnProperty('nickname') ); // should print false
+console.log( myObj.hasOwnProperty('name') ); // true
+console.log( myObj.hasOwnProperty('nickname') ); // false
 
 var suitcase = {
     shirt: "Hawaiian"
@@ -858,11 +858,223 @@ function Penguin(name){
     this.numLegs = 2
 }
 
-// set its prototype to be a new instance of Animal
-// so that Penguin inherits Aniaml class
+// set its prototype to be a new instance of Animal so that Penguin inherits Aniaml class
 Penguin.prototype = new Animal();
 
 var penguin = new Penguin();
 penguin.sayName();
 ```
 
+chain of inheritance
+```javascript
+function Animal(name, numLegs) {
+    this.name = name;
+    this.numLegs = numLegs;
+    this.isAlive = true;
+}
+function Penguin(name) {
+    this.name = name;
+    this.numLegs = 2;
+}
+function Emperor(name) {
+    this.name = name;
+    this.saying = "Waddle waddle";
+}
+
+// set up the prototype chain
+Penguin.prototype = new Animal();
+Emperor.prototype = new Penguin();
+
+var myEmperor = new Emperor("Jules");
+
+console.log(myEmperor.saying); // should print "Waddle waddle"
+console.log(myEmperor.numLegs); // should print 2
+console.log(myEmperor.isAlive); // should print true
+```
+
+## public private
+Inside the constructor, ```this.varName = val;``` is private while ```var varName = val;``` is public.
+
+private variable
+```javascript
+function Person(first,last,age) {
+   this.firstname = first; //public var
+   this.lastname = last;
+   this.age = age;
+   var bankBalance = 7500; //private var
+}
+
+var john = new Person("john", "doe", 1);
+console.log(john.bankBalance); //undefined!
+```
+
+You can access private variable using public method
+```javascript
+function Person(first,last,age) {
+   this.firstname = first;
+   this.lastname = last;
+   this.age = age;
+   var bankBalance = 7500; //private variable
+  
+   this.getBalance = function() { //public method to access private variable
+      return bankBalance;
+   };
+}
+
+var john = new Person('John','Smith',30);
+console.log(john.bankBalance); //undefined
+console.log(john.getBalance()); //7500
+```
+
+private methods: you can access using another public method.
+```javascript
+function Person(first,last,age) {
+   this.firstname = first;
+   this.lastname = last;
+   this.age = age;
+   var bankBalance = 7500;
+  
+   var returnBalance = function() { //private method
+      return bankBalance;
+   };
+   this.askTeller = function(){ //public method
+       return returnBalance; //no parentheses since it is returning the function itself
+   }
+}
+
+var john = new Person('John','Smith',30);
+console.log(john.returnBalance); //undefined
+
+var myBalanceMethod = john.askTeller(); //return a function
+var myBalance = myBalanceMethod();
+console.log(myBalance);//7500
+```
+
+passing argument
+```javascript
+function Person(first,last,age) {
+   this.firstname = first;
+   this.lastname = last;
+   this.age = age;
+   var bankBalance = 7500;
+  
+   this.askTeller = function(pass) {
+     if (pass == 1234) 
+     	return bankBalance;
+     else 
+     	return "Wrong password.";
+   };
+}
+
+var john = new Person('John','Smith',30);
+var myBalance = john.askTeller(1234);
+```
+
+typeof property value
+```javascript
+var languages = {
+    english: "Hello!",
+    french: "Bonjour!",
+    notALanguage: 4,
+    spanish: "Hola!"
+};
+
+for(var prop in languages){
+    var value = languages[prop];
+    if(typeof value === "string")
+        console.log(value);
+}
+```
+
+
+```javascript
+function Dog (breed) {
+    this.breed = breed;
+};
+Dog.prototype.sayHello = function(){
+    console.log("Hello this is a " + this.breed + " dog")
+}
+
+var yourDog = new Dog("golden retriever");
+yourDog.sayHello();
+
+var myDog = new Dog("dachshund");
+myDog.sayHello();
+```
+
+Object prototype Object hasOwnProperty
+```javascript
+// what is this "Object.prototype" anyway...?
+var prototypeType = typeof Object.prototype;
+console.log(prototypeType); //object
+
+var hasOwn = Object.prototype.hasOwnProperty("hasOwnProperty");
+console.log(hasOwn); //true
+```
+
+private properties are not accessed in for-in loop
+```javascript
+function StudentReport() {
+    var grade1 = 4;
+    var grade2 = 2;
+    var grade3 = 1;
+    this.getGPA = function() {
+        return (grade1 + grade2 + grade3) / 3;
+    };
+}
+
+var myStudentReport = new StudentReport();
+
+for(var x in myStudentReport) {
+    if(typeof myStudentReport[x] !== "function") {
+        console.log("Muahaha! " + myStudentReport[x]);
+    }
+}
+
+console.log("Your overall GPA is " + myStudentReport.getGPA());
+```
+
+## Example
+```javascript
+function StaffMember(name,discountPercent){
+    this.name = name;
+    this.discountPercent = discountPercent;
+}
+var sally = new StaffMember("Sally",5);
+var bob = new StaffMember("Bob",10);
+var me = new StaffMember("me", 20);
+
+
+var cashRegister = {
+    total:0,
+    lastTransactionAmount :0,
+    add: function(itemCost){
+        this.total += (itemCost || 0);
+        this.lastTransactionAmount = itemCost;
+    },
+    scan: function(item, qty) {
+        switch (item) {
+	        case "eggs": this.add(0.98*qty); break;
+	        case "milk": this.add(1.23*qty); break;
+	        case "magazine": this.add(4.99*qty); break;
+	        case "chocolate": this.add(0.45*qty); break;
+        }
+        return true;
+    },
+    voidLastTransaction: function(){
+    	this.total -= this.lastTransactionAmount;
+    },
+    applyStaffDiscount: function(staff){
+    	this.total *= (1-staff.discountPercent/100);
+    }
+};
+
+cashRegister.scan('eggs',1);
+cashRegister.scan('milk',1);
+cashRegister.scan("magazine",3);
+
+cashRegister.applyStaffDiscount(me);
+
+//Show the total bill
+console.log('Your bill is '+cashRegister.total);
+```
