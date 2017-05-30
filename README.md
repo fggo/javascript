@@ -753,3 +753,110 @@ else
     suitcase.shorts = "Hawaiian Blue";
 ```
 
+## for-in
+```javascript
+var nyc = {
+    fullName: "New York City",
+    mayor: "Bill de Blasio",
+    population: 8000000,
+    boroughs: 5
+};
+
+/*property key*/
+for(var prop in nyc)
+	console.log(prop);
+
+/*property value*/
+for(var prop in nyc)
+    console.log(nyc[prop])
+```
+
+## OOP
+When you make a contructor, you are in fact defining a new class.
+```javascript
+/*Define a Circle class*/
+function Circle(radius){
+	this.radius = radius
+}
+```
+
+## prototype in constructor
+JavaScript automatically defines the prototype for class with a constructor. 
+If an object tries to do something that is not defined in the prototype, error occurs.
+```javascript
+function Dog (breed) {
+  this.breed = breed;
+}
+var buddy = new Dog("Golden Retriever");
+buddy.bark = function() { //define what is not defined in prototype
+  console.log("Woof");
+};
+buddy.bark();
+
+var snoopy = new Dog("Beagle");
+snoopy.bark = buddy.bark; //since prototype has no bark() function, it has to give function
+snoopy.bark();
+```
+
+Classes are very important in object-oriented programming. This is because a class tells us helpful 
+information about objects, and you can think of an object as a particular instance of a class. 
+
+```javascript
+function Person(name,age) {
+  this.name = name;
+  this.age = age;
+}
+var printPersonName = function (p) {
+  console.log(p.name);
+};
+var bob = new Person("Bob Smith", 30);
+printPersonName(bob);
+```
+
+Change prototype for class
+```javascript
+function Dog (breed) {
+  this.breed = breed;
+};
+var buddy = new Dog("golden Retriever");
+Dog.prototype.bark = function() { //change prototype!
+  console.log("Woof");
+};
+buddy.bark();
+
+var snoopy = new Dog("Beagle");
+snoopy.bark(); // no need to : snoopy.bark = buddy.bark;
+```
+
+```javascript
+function Animal(name, numLegs){
+    this.name = name,
+    this.numLegs = numLegs
+};
+Animal.prototype.sayName = function(){
+    console.log("Hi my name is " + this.name);
+}
+
+var penguin = new Animal("Captain Cook", 2);
+penguin.sayName();
+```
+
+## Inheritance
+```javascript
+function Animal(name, numLegs) {
+    this.name = name;
+    this.numLegs = numLegs;
+}
+Animal.prototype.sayName = function() {
+    console.log("Hi my name is " + this.name);
+};
+
+function Penguin(name){
+    this.name = name,
+    this.numLegs = 2
+}
+
+// set its prototype to be a new instance of Animal
+Penguin.prototype = new Animal(); // Penguin inherits Aniaml class
+```
+
