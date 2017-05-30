@@ -843,6 +843,7 @@ penguin.sayName();
 
 ## Inheritance
 ```javascript
+/*Animal class*/
 function Animal(name, numLegs) {
     this.name = name;
     this.numLegs = numLegs;
@@ -851,12 +852,17 @@ Animal.prototype.sayName = function() {
     console.log("Hi my name is " + this.name);
 };
 
+/*Penguin class*/
 function Penguin(name){
     this.name = name,
     this.numLegs = 2
 }
 
 // set its prototype to be a new instance of Animal
-Penguin.prototype = new Animal(); // Penguin inherits Aniaml class
+// so that Penguin inherits Aniaml class
+Penguin.prototype = new Animal();
+
+var penguin = new Penguin();
+penguin.sayName();
 ```
 
