@@ -10,7 +10,7 @@
 ## Basic
 ```javascript
 "myName"
-"myName".length
+'myName'.length
 3+4
 3*4/2
 121/10
@@ -73,7 +73,7 @@ find 4th up to and including 7th of a string
 console.log("January".substring(0,3)) //Jan
 ```
 
-## Variables
+## Variable
 ```javascript
 var pi = 3.1415
 var myName = "eee"
@@ -81,7 +81,7 @@ console.log(pi);
 ```
 
 ## Reassign String
-string is immutable; letters can not be mutated; instead reassign to another string value
+string is immutable; one can reassign to another string value instead
 ```javascript
 var myName = "icecream"
 myName = myName.substring(0,2)
@@ -134,14 +134,14 @@ console.log(localVar); //error!
 /*another example*/
 var my_number = 7; //this has global scope
 var timesTwo = function(number) {
-	var my_number = number * 2;
+	var my_number = number * 2; //local; 14
 	console.log("Inside the function my_number is: ");
-	console.log(my_number); //local
+	console.log(my_number); //local; 14
 }; 
 timesTwo(7); //14
 
 console.log("Outside the function my_number is: ")
-console.log(my_number); //7; prints global
+console.log(my_number); //global; 7
 ```
 
 ## Example
@@ -149,9 +149,9 @@ Rock paper scissors
 ```javascript
 var userChoice = prompt("Do you choose rock, paper or scissors?");
 var computerChoice = Math.random();
-if (computerChoice < 0.34) {
+if (computerChoice <= 0.33) {
 	computerChoice = "rock";
-} else if(computerChoice <= 0.67) {
+} else if(computerChoice <= 0.66) {
 	computerChoice = "paper";
 } else {
 	computerChoice = "scissors";
@@ -186,15 +186,10 @@ compare(userChoice, computerChoice)
 
 ## for Loops
 ```javascript
-for (var counter = 1; counter <= 10; counter++) {
-	console.log(counter);
-}
-for (var i = 5; i < 51; i+=5) {
+for (var i = 5; i < 51; i+=5)
 	console.log(i);
-}
-for (var i = 10; i >= 0; i--) {
+for (var i = 10; i >= 0; i--)
 	console.log(i);
-}
 ```
 
 ## Array
@@ -208,16 +203,6 @@ for(var i =0; i<junk.length; i++)
 for(var i in junk)
 	console.log(i)
 ```
-
-## for each in
-[for...in](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for...in) 
-statement iterates over the enumerable properties of an object, in original insertion order.
-
-[for each...in](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for_each...in)
-statement iterates a specified variable over all values of object's properties. 
-For each distinct property, a specified statement is executed.
-a similar statement as for...in, but iterates over the values of object's properties, rather than the property 
-names themselves (deprecated)
 
 ## Example
 ```javascript
@@ -754,6 +739,14 @@ else
 ```
 
 ## for-in
+[for-in](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for...in) 
+statement iterates over the enumerable properties of an object
+
+[for each-in](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for_each...in)
+statement iterates a specified variable over all values of object's properties. 
+For each distinct property, a specified statement is executed.
+iterates over the values of object's properties, rather than the property names themselves
+
 ```javascript
 var nyc = {
     fullName: "New York City",
